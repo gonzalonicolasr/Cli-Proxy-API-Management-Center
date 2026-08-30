@@ -713,6 +713,26 @@
     "drop_hint": "Выберите или перетащите JSON-файл",
     "import_another": "Импортировать ещё"
   },
+  "opencode_login": {
+    "title": "Вход OpenCode Go",
+    "description": "У OpenCode нет OAuth. Войдите, скопируйте API-ключ и вставьте его здесь — по одному credential на аккаунт, поэтому несколько аккаунтов работают одновременно. Получить ключ:",
+    "label_label": "Метка аккаунта",
+    "label_hint": "Задаёт имя файла и заголовок карточки. По одной метке на аккаунт, например personal / work.",
+    "label_placeholder": "personal",
+    "key_label": "API-ключ",
+    "key_hint": "Ключ OpenCode Go. Перед сохранением проверяется через API использования.",
+    "key_placeholder": "sk-...",
+    "import_button": "Импортировать credential OpenCode",
+    "fields_required": "Сначала укажите метку аккаунта и API-ключ",
+    "name_taken": "{{file}} уже существует. Выберите другую метку, чтобы не перезаписать существующий credential.",
+    "key_rejected": "OpenCode отклонил этот API-ключ.",
+    "no_subscription": "Ключ действителен, но у аккаунта нет подписки Go.",
+    "validate_failed": "Не удалось проверить API-ключ.",
+    "success": "Credential сохранён как {{file}}",
+    "result_title": "Credential сохранён",
+    "result_file": "Файл авторизации",
+    "add_another_hint": "Чтобы добавить ещё аккаунт, введите новую метку и ключ."
+  },
   "oauth_excluded": {
     "editor_description": "Настройте скрытые модели провайдера: выберите отдельные модели или задайте шаблоны.",
     "models_hint": "Разверните список для выбора моделей или введите шаблоны ниже.",
