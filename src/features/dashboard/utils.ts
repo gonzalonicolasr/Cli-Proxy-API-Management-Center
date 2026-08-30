@@ -17,6 +17,7 @@ const PROVIDER_LABELS: Record<string, string> = {
   kimi: 'Kimi',
   iflow: 'iFlow',
   antigravity: 'Antigravity',
+  opencode: 'OpenCode',
 };
 
 /**

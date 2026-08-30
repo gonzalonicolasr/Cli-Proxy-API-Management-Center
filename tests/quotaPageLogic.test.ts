@@ -81,6 +81,7 @@ describe('buildTabCounts', () => {
       devin: 0,
       meta: 0,
       plugin: 0,
+      opencode: 0,
     });
   });
 });

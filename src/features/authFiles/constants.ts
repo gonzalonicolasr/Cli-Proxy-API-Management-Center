@@ -35,6 +35,7 @@ export type QuotaProviderType =
   | 'kimi'
   | 'meta'
   | 'plugin'
+  | 'opencode'
   | 'xai';
 export type AuthFileQuotaFilter = string | null;
 export type OAuthConfigLoadError = 'loading' | 'unsupported' | 'load' | null;
@@ -47,6 +48,7 @@ export const QUOTA_PROVIDER_TYPES = new Set<QuotaProviderType>([
   'devin',
   'kimi',
   'plugin',
+  'opencode',
   'xai',
 ]);
 
