@@ -1696,7 +1696,8 @@
     "weekday_wed": "三",
     "weekday_thu": "四",
     "weekday_fri": "五",
-    "weekday_sat": "六"
+    "weekday_sat": "六",
+    "prefix_hint": "以 {{prefix}}/<model> 呼叫該憑證"
   },
   "routing": {
     "title": "路由編排",

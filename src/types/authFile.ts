@@ -56,6 +56,13 @@ export interface AuthFileItem {
   email?: string;
   /** GCP / Vertex project ID, used when account email is absent. */
   projectId?: string;
+  /**
+   * Routing prefix for this credential (`prefix/<model>`).
+   *
+   * Only present on servers new enough to send it; older ones omit the field
+   * and every prefix-aware surface simply renders nothing.
+   */
+  prefix?: string;
   size?: number;
   authIndex?: string | number | null;
   /** Generic plugin quota capability advertised by CPA's auth-files API. */
