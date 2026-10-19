@@ -112,7 +112,9 @@ export const useQuotaStore = create<QuotaStoreState>((set) => ({
   setPluginQuota: (updater) =>
     set((state) => ({
       pluginQuota: resolveUpdater(updater, state.pluginQuota),
+    })),
   setOpencodeQuota: (updater) =>
+    set((state) => ({
       opencodeQuota: resolveUpdater(updater, state.opencodeQuota),
     })),
   setXaiQuota: (updater) =>

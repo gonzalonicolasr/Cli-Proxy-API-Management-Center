@@ -440,7 +440,8 @@
     "policy_rules_hint": "Các quy tắc tùy chỉnh được ưu tiên theo thứ tự danh sách. Kế thừa hoặc danh sách trống sẽ sử dụng quy tắc kế thừa; điều này không vô hiệu hóa chúng. Mẫu biểu thức chính quy (Regex) dùng cú pháp của Go.",
     "policy_retry_invalid": "Nhập một số nguyên an toàn không âm, hoặc chọn Kế thừa.",
     "policy_aliases_invalid": "Nhập tên model và bí danh không để trống cho mỗi hàng mới hoặc đã chỉnh sửa.",
-    "policy_rules_invalid": "Hoàn thành mỗi quy tắc đã chỉnh sửa với mã trạng thái dương, một hành động và ít nhất một điều kiện khớp không để trống."
+    "policy_rules_invalid": "Hoàn thành mỗi quy tắc đã chỉnh sửa với mã trạng thái dương, một hành động và ít nhất một điều kiện khớp không để trống.",
+    "filter_opencode": "OpenCode"
   },
   "antigravity_subscription": {
     "plan_unknown": "Không rõ",
@@ -1588,7 +1589,8 @@
     "search_placeholder": "Tìm theo tên file hoặc email",
     "search_empty_title": "Không có tài khoản phù hợp",
     "search_empty_desc": "Hãy thử tên file hoặc email khác, hoặc xóa tìm kiếm.",
-    "search_clear": "Xóa tìm kiếm"
+    "search_clear": "Xóa tìm kiếm",
+    "prefix_hint": "Address this credential as {{prefix}}/<model>"
   },
   "routing": {
     "title": "Định tuyến",
@@ -2434,5 +2436,41 @@
     "error": "Liên kết thất bại. Hãy bắt đầu lại.",
     "unsupported": "Máy chủ này không hỗ trợ liên kết SIWC.",
     "expired": "Phiên liên kết đã hết hạn. Hãy bắt đầu lại."
+  },
+  "opencode_quota": {
+    "title": "OpenCode Quota",
+    "empty_title": "No OpenCode Auth Files",
+    "empty_desc": "Upload an OpenCode Go credential to view remaining quota.",
+    "idle": "Click here to refresh quota",
+    "loading": "Loading quota...",
+    "load_failed": "Failed to load quota: {{message}}",
+    "missing_auth_index": "Auth file missing auth_index",
+    "empty_data": "No quota data available",
+    "refresh_button": "Refresh Quota",
+    "fetch_all": "Fetch All",
+    "five_hour_limit": "5-hour limit",
+    "weekly_limit": "Weekly limit",
+    "monthly_limit": "Monthly limit",
+    "rate_limited": "Rate limited"
+  },
+  "opencode_login": {
+    "title": "OpenCode Go Login",
+    "description": "OpenCode has no OAuth flow. Sign in, copy an API key, and paste it here — one credential per account, so several accounts can run side by side. Get a key at",
+    "label_label": "Account label",
+    "label_hint": "Names the credential file and the card. Use one label per account, e.g. personal / work.",
+    "label_placeholder": "personal",
+    "key_label": "API key",
+    "key_hint": "The OpenCode Go key. It is validated against the usage API before being saved.",
+    "key_placeholder": "sk-...",
+    "import_button": "Import OpenCode Credential",
+    "fields_required": "Enter an account label and an API key first",
+    "name_taken": "{{file}} already exists. Pick another account label so the existing credential is not overwritten.",
+    "key_rejected": "OpenCode rejected this API key.",
+    "no_subscription": "This key is valid but the account has no Go subscription.",
+    "validate_failed": "Could not validate the API key.",
+    "success": "Credential saved as {{file}}",
+    "result_title": "Credential saved",
+    "result_file": "Auth file",
+    "add_another_hint": "Add another account by entering a new label and key."
   }
 }
