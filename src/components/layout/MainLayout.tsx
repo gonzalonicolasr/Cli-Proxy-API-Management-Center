@@ -50,7 +50,7 @@ import {
 } from '@/features/plugins/pluginResources';
 import { APIKEY_FUN_DISPLAY_NAME, hasApiKeyFunConfig } from '@/features/providers/sponsor';
 import { triggerHeaderRefresh } from '@/hooks/useHeaderRefresh';
-import { LANGUAGE_LABEL_KEYS, LANGUAGE_ORDER } from '@/utils/constants';
+import { isNervTheme, LANGUAGE_LABEL_KEYS, LANGUAGE_ORDER } from '@/utils/constants';
 import { isSupportedLanguage } from '@/utils/language';
 import { getSidebarShortcutLabel, isSidebarToggleShortcut } from '@/utils/sidebarShortcut';
 import type { Theme } from '@/types';
@@ -249,6 +249,13 @@ const headerIcons = {
       <path d="M19.07 4.93l-1.41 1.41" />
     </svg>
   ),
+  nervTheme: (
+    <svg {...headerIconProps}>
+      <path d="M12 2 20.66 7v10L12 22 3.34 17V7z" />
+      <path d="M12 8v8" />
+      <path d="M8.5 10h7" />
+    </svg>
+  ),
   logout: (
     <svg {...headerIconProps}>
       <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -305,6 +312,83 @@ const THEME_CARDS: Array<{
       border: '#3a3530',
       text: '#f6f4f1',
       textMuted: '#9c958d',
+    },
+  },
+  {
+    key: 'nerv',
+    labelKey: 'theme.nerv',
+    colors: {
+      bg: '#0a0605',
+      card: '#1d120d',
+      border: '#ff7a1a',
+      text: '#ffe3cc',
+      textMuted: '#ff7a1a',
+    },
+  },
+  {
+    key: 'eva01',
+    labelKey: 'theme.eva01',
+    colors: {
+      bg: '#140c22',
+      card: '#241a33',
+      border: '#8b5cf6',
+      text: '#ece2fb',
+      textMuted: '#a3e635',
+    },
+  },
+  {
+    key: 'eva00',
+    labelKey: 'theme.eva00',
+    colors: {
+      bg: '#0b1220',
+      card: '#16213a',
+      border: '#3b82f6',
+      text: '#e5e7eb',
+      textMuted: '#facc15',
+    },
+  },
+  {
+    key: 'eva02',
+    labelKey: 'theme.eva02',
+    colors: {
+      bg: '#1a0a08',
+      card: '#2c1410',
+      border: '#ef4444',
+      text: '#fde8e1',
+      textMuted: '#fbbf24',
+    },
+  },
+  {
+    key: 'eva03',
+    labelKey: 'theme.eva03',
+    colors: {
+      bg: '#07070a',
+      card: '#16161b',
+      border: '#d4d4d8',
+      text: '#f4f4f5',
+      textMuted: '#f59e0b',
+    },
+  },
+  {
+    key: 'eva08',
+    labelKey: 'theme.eva08',
+    colors: {
+      bg: '#1a0a14',
+      card: '#2c1224',
+      border: '#ec4899',
+      text: '#fce7f3',
+      textMuted: '#22c55e',
+    },
+  },
+  {
+    key: 'mark06',
+    labelKey: 'theme.mark06',
+    colors: {
+      bg: '#0a0f1e',
+      card: '#172036',
+      border: '#3b82f6',
+      text: '#e2e8f0',
+      textMuted: '#cbd5e1',
     },
   },
 ];
@@ -1078,13 +1162,15 @@ export function MainLayout() {
               aria-haspopup="menu"
               aria-expanded={themeMenuOpen}
             >
-              {theme === 'auto'
-                ? headerIcons.autoTheme
-                : theme === 'dark'
-                  ? headerIcons.moon
-                  : theme === 'white'
-                    ? headerIcons.whiteTheme
-                    : headerIcons.sun}
+              {isNervTheme(theme)
+                ? headerIcons.nervTheme
+                : theme === 'auto'
+                  ? headerIcons.autoTheme
+                  : theme === 'dark'
+                    ? headerIcons.moon
+                    : theme === 'white'
+                      ? headerIcons.whiteTheme
+                      : headerIcons.sun}
             </Button>
             {themeMenuOpen && (
               <div

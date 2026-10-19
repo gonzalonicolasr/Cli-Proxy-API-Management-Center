@@ -275,7 +275,8 @@
 
   .theme-menu-popover {
     padding: $spacing-sm $spacing-sm $spacing-xs;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
     gap: $spacing-xs;
     width: max-content;
     max-width: calc(100vw - 16px);

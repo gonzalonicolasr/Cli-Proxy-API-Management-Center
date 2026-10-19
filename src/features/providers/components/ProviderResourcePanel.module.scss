@@ -91,7 +91,8 @@
   background: #000;
   padding: 5px;
 
-  [data-theme='dark'] & {
+  [data-theme='dark'] &,
+  [data-theme-family='nerv'] & {
     background: #fff;
   }
 }
@@ -99,19 +100,22 @@
 .logoThemeDark {
   display: none;
 
-  [data-theme='dark'] & {
+  [data-theme='dark'] &,
+  [data-theme-family='nerv'] & {
     display: block;
   }
 }
 
 .logoThemeLight {
-  [data-theme='dark'] & {
+  [data-theme='dark'] &,
+  [data-theme-family='nerv'] & {
     display: none;
   }
 }
 
 .logoInvertOnDark {
-  [data-theme='dark'] & {
+  [data-theme='dark'] &,
+  [data-theme-family='nerv'] & {
     filter: invert(1) hue-rotate(180deg);
   }
 }

@@ -31,6 +31,11 @@ export const MAX_AUTH_FILE_SIZE = 10 * 1024 * 1024;
 // 本地存储键名
 export const STORAGE_KEY_AUTH = 'cli-proxy-auth';
 export const STORAGE_KEY_THEME = 'cli-proxy-theme';
+
+// NERV 主题家族（共享结构与特效，仅调色板不同；见 src/styles/nerv.scss）
+export const NERV_THEMES = ['nerv', 'eva00', 'eva01', 'eva02', 'eva03', 'eva08', 'mark06'] as const;
+export const isNervTheme = (theme: string): theme is (typeof NERV_THEMES)[number] =>
+  (NERV_THEMES as readonly string[]).includes(theme);
 export const STORAGE_KEY_LANGUAGE = 'cli-proxy-language';
 
 // 语言配置

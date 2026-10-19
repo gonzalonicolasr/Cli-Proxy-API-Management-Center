@@ -1995,7 +1995,14 @@
     "light": "羊毛纸",
     "white": "纯白",
     "dark": "暗色",
-    "auto": "跟随系统"
+    "auto": "跟随系统",
+    "nerv": "NERV",
+    "eva00": "EVA-00",
+    "eva01": "EVA-01",
+    "eva02": "EVA-02",
+    "eva03": "EVA-03",
+    "eva08": "EVA-08",
+    "mark06": "Mark.06"
   },
   "sidebar": {
     "toggle_expand": "展开侧边栏",

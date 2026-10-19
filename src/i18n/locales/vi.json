@@ -1916,7 +1916,14 @@
     "light": "Giấy len",
     "white": "Trắng tinh",
     "dark": "Tối",
-    "auto": "Theo hệ thống"
+    "auto": "Theo hệ thống",
+    "nerv": "NERV",
+    "eva00": "EVA-00",
+    "eva01": "EVA-01",
+    "eva02": "EVA-02",
+    "eva03": "EVA-03",
+    "eva08": "EVA-08",
+    "mark06": "Mark.06"
   },
   "sidebar": {
     "toggle_expand": "Mở rộng thanh bên",

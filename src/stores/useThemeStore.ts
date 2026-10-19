@@ -5,11 +5,11 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Theme } from '@/types';
-import { STORAGE_KEY_THEME } from '@/utils/constants';
+import type { NervTheme, Theme } from '@/types';
+import { isNervTheme, STORAGE_KEY_THEME } from '@/utils/constants';
 
 type ResolvedTheme = 'light' | 'dark';
-type AppliedTheme = ResolvedTheme | 'white';
+type AppliedTheme = ResolvedTheme | 'white' | NervTheme;
 
 interface ThemeState {
   theme: Theme;
@@ -30,7 +30,8 @@ const resolveAutoTheme = (): AppliedTheme => {
 };
 
 const normalizeResolvedTheme = (theme: AppliedTheme): ResolvedTheme => {
-  return theme === 'dark' ? 'dark' : 'light';
+  // The NERV family is dark-based: icons and charts use their dark variants.
+  return theme === 'dark' || isNervTheme(theme) ? 'dark' : 'light';
 };
 
 const resolveTheme = (theme: Theme): AppliedTheme => {
@@ -44,6 +45,15 @@ const resolveTheme = (theme: Theme): AppliedTheme => {
 };
 
 const applyTheme = (resolved: AppliedTheme) => {
+  const root = document.documentElement;
+  // Structure and effects hang off the family attribute; each unit only swaps the palette.
+  if (isNervTheme(resolved)) {
+    root.setAttribute('data-theme', resolved);
+    root.setAttribute('data-theme-family', 'nerv');
+    return;
+  }
+  root.removeAttribute('data-theme-family');
+
   if (resolved === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
     return;

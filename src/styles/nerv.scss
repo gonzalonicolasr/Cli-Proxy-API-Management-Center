@@ -1,0 +1,571 @@
+/**
+ * NERV theme family.
+ *
+ * One palette map drives every member: `nerv` (the console look: orange on black, MAGI
+ * green readouts) plus one theme per Evangelion unit. The theme store sets
+ * `data-theme="<id>"` for the palette and `data-theme-family="nerv"` for the shared
+ * structure and effects, so adding a unit is one map entry plus a card in the menu.
+ *
+ * Unit colours come from the NERV pane palette (~/projects/nerv/hooks/register.ts):
+ *   primary = unit main colour, accent = lime, plus amber/orange/red/cyan.
+ *
+ * Module-level overrides use `[class*='Name-module__local___']` selectors. They rely on
+ * `generateScopedName: '[name]__[local]___[hash]'` in vite.config.ts — if that pattern
+ * changes, those rules stop matching silently.
+ *
+ * Every animation is switched off under `prefers-reduced-motion: reduce`.
+ */
+
+@use 'sass:map';
+
+$nerv-palettes: (
+  nerv: (
+    primary: #ff7a1a,
+    primary-hover: #ff9442,
+    primary-active: #e8650a,
+    accent: #4ade80,
+    amber: #f59e0b,
+    orange: #ff7a1a,
+    red: #ef4444,
+    cyan: #22d3ee,
+    text: #ffe3cc,
+    muted: #b48a68,
+    dim: #6e4b33,
+    ink: #0a0605,
+    surface: #140c09,
+    raised: #1d120d,
+    hover: #2a1810,
+    border: #3d2416,
+    border-strong: #5a2e16,
+  ),
+  eva01: (
+    primary: #8b5cf6,
+    primary-hover: #a07cf8,
+    primary-active: #7b3fb8,
+    accent: #a3e635,
+    amber: #f59e0b,
+    orange: #ff7a1a,
+    red: #ef4444,
+    cyan: #22d3ee,
+    text: #ece2fb,
+    muted: #8a73ad,
+    dim: #5b4a75,
+    ink: #140c22,
+    surface: #1c1529,
+    raised: #241a33,
+    hover: #2e2340,
+    border: #3a2560,
+    border-strong: #4b2a7a,
+  ),
+  eva00: (
+    primary: #3b82f6,
+    primary-hover: #60a5fa,
+    primary-active: #1e40af,
+    accent: #facc15,
+    amber: #f59e0b,
+    orange: #fb923c,
+    red: #ef4444,
+    cyan: #7dd3fc,
+    text: #e5e7eb,
+    muted: #8b9bb4,
+    dim: #475569,
+    ink: #0b1220,
+    surface: #111a2e,
+    raised: #16213a,
+    hover: #1e2a44,
+    border: #1d3a70,
+    border-strong: #1e40af,
+  ),
+  eva02: (
+    primary: #ef4444,
+    primary-hover: #f87171,
+    primary-active: #dc2626,
+    accent: #fbbf24,
+    amber: #f59e0b,
+    orange: #f97316,
+    red: #ef4444,
+    cyan: #fdba74,
+    text: #fde8e1,
+    muted: #b0857a,
+    dim: #6b3b33,
+    ink: #1a0a08,
+    surface: #22100c,
+    raised: #2c1410,
+    hover: #3a1a14,
+    border: #5a1a14,
+    border-strong: #7f1d1d,
+  ),
+  // EVA-03: black armour with white/silver plating and amber lights.
+  eva03: (
+      primary: #d4d4d8,
+      primary-hover: #e4e4e7,
+      primary-active: #a1a1aa,
+      accent: #f59e0b,
+      amber: #f59e0b,
+      orange: #fb923c,
+      red: #ef4444,
+      cyan: #a5b4fc,
+      text: #f4f4f5,
+      muted: #a1a1aa,
+      dim: #52525b,
+      ink: #07070a,
+      surface: #0e0e12,
+      raised: #16161b,
+      hover: #1f1f26,
+      border: #2e2e36,
+      border-strong: #3f3f48,
+    ),
+  eva08: (
+    primary: #ec4899,
+    primary-hover: #f472b6,
+    primary-active: #be185d,
+    accent: #22c55e,
+    amber: #f59e0b,
+    orange: #fb923c,
+    red: #ef4444,
+    cyan: #4ade80,
+    text: #fce7f3,
+    muted: #b47e9e,
+    dim: #6b3a5a,
+    ink: #1a0a14,
+    surface: #220e1c,
+    raised: #2c1224,
+    hover: #3a1430,
+    border: #5c1846,
+    border-strong: #86198f,
+  ),
+  mark06: (
+    primary: #3b82f6,
+    primary-hover: #93c5fd,
+    primary-active: #1e3a8a,
+    accent: #cbd5e1,
+    amber: #f59e0b,
+    orange: #94a3b8,
+    red: #ef4444,
+    cyan: #93c5fd,
+    text: #e2e8f0,
+    muted: #94a3b8,
+    dim: #475569,
+    ink: #0a0f1e,
+    surface: #111827,
+    raised: #172036,
+    hover: #1e293b,
+    border: #1e3a8a,
+    border-strong: #2747a8,
+  ),
+);
+
+$nerv-mono:
+  'JetBrains Mono', 'Fira Code', 'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace;
+
+// ---------------------------------------------------------------------------
+// Palettes → the app's design tokens
+// ---------------------------------------------------------------------------
+@each $id, $p in $nerv-palettes {
+  [data-theme='#{$id}'] {
+    color-scheme: dark;
+
+    --nerv-primary: #{map.get($p, primary)};
+    --nerv-accent: #{map.get($p, accent)};
+    --nerv-amber: #{map.get($p, amber)};
+    --nerv-orange: #{map.get($p, orange)};
+    --nerv-red: #{map.get($p, red)};
+    --nerv-cyan: #{map.get($p, cyan)};
+    --nerv-ink: #{map.get($p, ink)};
+
+    --bg-secondary: #{map.get($p, ink)};
+    --bg-primary: #{map.get($p, surface)};
+    --bg-tertiary: #{map.get($p, raised)};
+    --bg-hover: #{map.get($p, hover)};
+    --bg-quinary: #{map.get($p, surface)};
+    --bg-error-light: color-mix(in srgb, #{map.get($p, red)} 18%, transparent);
+    --floating-surface: #{map.get($p, raised)};
+    --floating-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+
+    --text-primary: #{map.get($p, text)};
+    --text-secondary: #{map.get($p, muted)};
+    --text-tertiary: color-mix(in srgb, #{map.get($p, muted)} 70%, #{map.get($p, dim)});
+    --text-quaternary: #{map.get($p, dim)};
+    --text-muted: var(--text-tertiary);
+
+    --border-color: #{map.get($p, border)};
+    --border-secondary: var(--border-color);
+    --border-primary: #{map.get($p, border-strong)};
+    --border-hover: #{map.get($p, primary-active)};
+
+    --primary-color: #{map.get($p, primary)};
+    --primary-hover: #{map.get($p, primary-hover)};
+    --primary-active: #{map.get($p, primary-active)};
+    --primary-contrast: #{map.get($p, ink)};
+
+    --success-color: #{map.get($p, accent)};
+    --quota-medium-color: #{map.get($p, amber)};
+    --warning-color: #{map.get($p, orange)};
+    --error-color: #{map.get($p, red)};
+    --danger-color: var(--error-color);
+    --info-color: #{map.get($p, cyan)};
+
+    --warning-bg: color-mix(in srgb, #{map.get($p, orange)} 18%, transparent);
+    --warning-border: color-mix(in srgb, #{map.get($p, orange)} 45%, transparent);
+    --warning-text: #{map.get($p, orange)};
+
+    --success-badge-bg: color-mix(in srgb, #{map.get($p, accent)} 16%, transparent);
+    --success-badge-text: #{map.get($p, accent)};
+    --success-badge-border: color-mix(in srgb, #{map.get($p, accent)} 50%, transparent);
+
+    --failure-badge-bg: color-mix(in srgb, #{map.get($p, red)} 20%, transparent);
+    --failure-badge-text: #{map.get($p, red)};
+    --failure-badge-border: color-mix(in srgb, #{map.get($p, red)} 50%, transparent);
+
+    --count-badge-bg: color-mix(in srgb, #{map.get($p, primary)} 24%, transparent);
+    --count-badge-text: #{map.get($p, primary-hover)};
+
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.45);
+    --shadow-lg: 0 10px 18px -3px rgb(0 0 0 / 0.5);
+
+    --primary-8: color-mix(in srgb, var(--primary-color) 8%, transparent);
+    --primary-10: color-mix(in srgb, var(--primary-color) 10%, transparent);
+    --primary-30: color-mix(in srgb, var(--primary-color) 30%, transparent);
+    --amber-color: #{map.get($p, amber)};
+    --amber-text: #{map.get($p, amber)};
+    --amber-10: color-mix(in srgb, var(--amber-color) 14%, transparent);
+    --amber-30: color-mix(in srgb, var(--amber-color) 38%, transparent);
+    --destructive-color: var(--error-color);
+    --destructive-10: color-mix(in srgb, var(--destructive-color) 14%, transparent);
+    --destructive-30: color-mix(in srgb, var(--destructive-color) 38%, transparent);
+    --muted-bg: var(--bg-tertiary);
+    --muted-foreground: var(--text-secondary);
+    --accent-bg: var(--bg-tertiary);
+
+    --glass-border: color-mix(in srgb, var(--border-color) 70%, transparent);
+
+    --viz-success: #{map.get($p, accent)};
+    --viz-failure: #{map.get($p, red)};
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Shared structure and effects
+// ---------------------------------------------------------------------------
+@keyframes nerv-scan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 4px;
+  }
+}
+
+@keyframes nerv-sweep {
+  0% {
+    transform: translateY(-20vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh);
+    opacity: 0;
+  }
+}
+
+@keyframes nerv-boot {
+  0% {
+    opacity: 0;
+    filter: brightness(2.2) saturate(0.2);
+  }
+  12% {
+    opacity: 1;
+  }
+  18% {
+    opacity: 0.35;
+  }
+  26% {
+    opacity: 1;
+    filter: none;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes nerv-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--nerv-primary) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 14px 0 color-mix(in srgb, var(--nerv-primary) 35%, transparent);
+  }
+}
+
+@keyframes nerv-blink {
+  0%,
+  60%,
+  100% {
+    opacity: 1;
+  }
+  70%,
+  90% {
+    opacity: 0.25;
+  }
+}
+
+[data-theme-family='nerv'] {
+  body {
+    background-color: var(--bg-secondary);
+    // Tactical grid + hexagon-ish diagonal mesh, tinted by the unit colour.
+    background-image:
+      radial-gradient(
+        ellipse at 50% -10%,
+        color-mix(in srgb, var(--nerv-primary) 16%, transparent),
+        transparent 60%
+      ),
+      repeating-linear-gradient(
+        60deg,
+        color-mix(in srgb, var(--nerv-primary) 5%, transparent) 0 1px,
+        transparent 1px 28px
+      ),
+      repeating-linear-gradient(
+        -60deg,
+        color-mix(in srgb, var(--nerv-primary) 5%, transparent) 0 1px,
+        transparent 1px 28px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        color-mix(in srgb, var(--nerv-primary) 4%, transparent) 0 1px,
+        transparent 1px 48px
+      );
+    background-attachment: fixed;
+    animation: nerv-boot 900ms steps(12, end) 1;
+  }
+
+  // CRT scanlines over the whole console.
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2147483000;
+    background: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.16) 0 1px, transparent 1px 4px);
+    mix-blend-mode: multiply;
+    animation: nerv-scan 400ms linear infinite;
+  }
+
+  // Slow scanning bar.
+  body::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 14vh;
+    pointer-events: none;
+    z-index: 2147483001;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      color-mix(in srgb, var(--nerv-primary) 7%, transparent),
+      transparent
+    );
+    animation: nerv-sweep 7s linear infinite;
+  }
+
+  // Typography: terminal readouts.
+  h1,
+  h2,
+  h3,
+  h4,
+  .card-header,
+  .sidebar-brand-title,
+  .nav-group-label,
+  .theme-card-label,
+  .status-badge,
+  .pill,
+  .btn {
+    font-family: $nerv-mono;
+    letter-spacing: 0.06em;
+  }
+
+  h1,
+  h2,
+  h3,
+  .card-header,
+  .nav-group-label,
+  .sidebar-brand-title {
+    text-transform: uppercase;
+  }
+
+  .sidebar-brand-title {
+    color: var(--nerv-primary);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--nerv-primary) 55%, transparent);
+  }
+
+  .sidebar-brand-subtitle::after {
+    content: ' // NERV';
+    color: var(--nerv-red);
+    font-family: $nerv-mono;
+    animation: nerv-blink 3.2s steps(1, end) infinite;
+  }
+
+  .main-header {
+    border-bottom: 1px solid color-mix(in srgb, var(--nerv-primary) 45%, transparent);
+    box-shadow: 0 1px 0 0 color-mix(in srgb, var(--nerv-primary) 18%, transparent);
+  }
+
+  .sidebar {
+    border-right: 1px solid color-mix(in srgb, var(--nerv-primary) 30%, transparent);
+  }
+
+  .nav-item.active {
+    color: var(--nerv-primary);
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--nerv-primary) 22%, transparent),
+      transparent
+    );
+    box-shadow: inset 3px 0 0 0 var(--nerv-primary);
+  }
+
+  // Panels: square corners with targeting brackets (no clip-path: it would clip popovers).
+  .card,
+  [class*='QuotaCard-module__card___'],
+  [class*='LoginPage-module__loginCard___'] {
+    position: relative;
+    border: 1px solid color-mix(in srgb, var(--nerv-primary) 32%, var(--border-color));
+    border-radius: 2px;
+    background-image:
+      linear-gradient(var(--nerv-primary), var(--nerv-primary)),
+      linear-gradient(var(--nerv-primary), var(--nerv-primary)),
+      linear-gradient(var(--nerv-accent), var(--nerv-accent)),
+      linear-gradient(var(--nerv-accent), var(--nerv-accent));
+    background-size:
+      18px 2px,
+      2px 18px,
+      18px 2px,
+      2px 18px;
+    background-position:
+      0 0,
+      0 0,
+      100% 100%,
+      100% 100%;
+    background-repeat: no-repeat;
+    transition:
+      border-color var(--dur-hover) var(--ease-out-strong),
+      box-shadow var(--dur-hover) var(--ease-out-strong);
+
+    &:hover {
+      border-color: var(--nerv-primary);
+      box-shadow: 0 0 18px -6px var(--nerv-primary);
+    }
+  }
+
+  .btn {
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-size: 0.86em;
+  }
+
+  .btn.btn-primary {
+    color: var(--nerv-ink);
+    background: var(--nerv-primary);
+    box-shadow: 0 0 12px -4px var(--nerv-primary);
+
+    &:hover:not(:disabled) {
+      background: var(--primary-hover);
+      animation: nerv-pulse 1.4s ease-in-out infinite;
+    }
+  }
+
+  .btn.btn-secondary,
+  .btn.btn-ghost {
+    color: var(--text-primary);
+  }
+
+  .input,
+  textarea {
+    font-family: $nerv-mono;
+    border-radius: 2px;
+
+    &:focus {
+      border-color: var(--nerv-primary);
+      box-shadow:
+        0 0 0 1px var(--nerv-primary),
+        0 0 12px -4px var(--nerv-primary);
+    }
+  }
+
+  // Quota meters: segmented MAGI readout.
+  [class*='QuotaBody-module__quotaBar___'] {
+    border-radius: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--nerv-primary) 14%, transparent) 0 6px,
+      transparent 6px 8px
+    );
+  }
+
+  [class*='QuotaBody-module__quotaBarFill___'] {
+    border-radius: 0;
+    -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 8px);
+    mask-image: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 8px);
+    box-shadow: 0 0 10px -2px currentColor;
+  }
+
+  [class*='QuotaBody-module__quotaPercent___'],
+  [class*='QuotaBody-module__quotaReset___'],
+  [class*='QuotaCard-module__fileName___'],
+  [class*='QuotaCard-module__prefixChip___'] {
+    font-family: $nerv-mono;
+  }
+
+  // Errors get hazard stripes.
+  .error-box {
+    border-left: 4px solid transparent;
+    border-image: repeating-linear-gradient(
+        45deg,
+        var(--nerv-amber) 0 6px,
+        var(--nerv-ink) 6px 12px
+      )
+      4;
+  }
+
+  .status-badge,
+  .pill {
+    border-radius: 2px;
+  }
+
+  .modal {
+    border: 1px solid var(--nerv-primary);
+    border-radius: 2px;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--nerv-primary) 30%, transparent),
+      0 0 40px -12px var(--nerv-primary);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--nerv-primary) 45%, transparent);
+    color: var(--text-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--nerv-primary) 40%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme-family='nerv'] {
+    body,
+    body::before,
+    .sidebar-brand-subtitle::after,
+    .btn.btn-primary:hover:not(:disabled) {
+      animation: none !important;
+    }
+
+    body::after {
+      display: none;
+      animation: none !important;
+    }
+  }
+}

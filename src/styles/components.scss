@@ -73,7 +73,8 @@
   }
 }
 
-[data-theme='dark'] {
+[data-theme='dark'],
+[data-theme-family='nerv'] {
   .btn {
     color: #fff;
   }
