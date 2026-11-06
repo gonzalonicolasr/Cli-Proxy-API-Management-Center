@@ -487,8 +487,7 @@ $site-radius: 12px;
 
 /* ---------- 主题 ---------- */
 
-:global([data-theme='dark']),
-:global([data-theme-family='nerv']) {
+:global([data-theme='dark']) {
   .card {
     background: linear-gradient(
       135deg,

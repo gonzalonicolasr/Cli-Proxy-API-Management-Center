@@ -24,4 +24,16 @@ describe('NERV theme family', () => {
   test('effects are disabled for reduced motion', () => {
     expect(nervScss).toContain('@media (prefers-reduced-motion: reduce)');
   });
+
+  test('stays calm: no looping animations', () => {
+    expect(nervScss).not.toMatch(/infinite/);
+    expect(nervScss).not.toMatch(/@keyframes/);
+  });
+
+  test('palettes key off the unit attribute so dark module overrides still apply', () => {
+    expect(nervScss).toContain("[data-theme-family='nerv'][data-nerv-unit='#{$id}']");
+    const store = readFileSync(join(import.meta.dir, '../src/stores/useThemeStore.ts'), 'utf8');
+    expect(store).toContain("root.setAttribute('data-theme', 'dark')");
+    expect(store).toContain("theme: 'nerv'");
+  });
 });

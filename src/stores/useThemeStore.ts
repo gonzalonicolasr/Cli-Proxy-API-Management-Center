@@ -46,13 +46,16 @@ const resolveTheme = (theme: Theme): AppliedTheme => {
 
 const applyTheme = (resolved: AppliedTheme) => {
   const root = document.documentElement;
-  // Structure and effects hang off the family attribute; each unit only swaps the palette.
+  // The NERV family is dark-based: data-theme='dark' keeps every module's dark override
+  // working, the family attribute carries the shared structure and the unit swaps the palette.
   if (isNervTheme(resolved)) {
-    root.setAttribute('data-theme', resolved);
+    root.setAttribute('data-theme', 'dark');
     root.setAttribute('data-theme-family', 'nerv');
+    root.setAttribute('data-nerv-unit', resolved);
     return;
   }
   root.removeAttribute('data-theme-family');
+  root.removeAttribute('data-nerv-unit');
 
   if (resolved === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -70,8 +73,9 @@ const applyTheme = (resolved: AppliedTheme) => {
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set, get) => ({
-      theme: 'auto',
-      resolvedTheme: 'light',
+      // NERV is the default console look.
+      theme: 'nerv',
+      resolvedTheme: 'dark',
 
       setTheme: (theme) => {
         const resolved = resolveTheme(theme);
@@ -110,6 +114,16 @@ export const useThemeStore = create<ThemeState>()(
     }),
     {
       name: STORAGE_KEY_THEME,
+      // v1 made NERV the default: a choice saved before it moves to NERV once,
+      // unless it already was a NERV unit.
+      version: 1,
+      migrate: (persisted, version) => {
+        const state = (persisted ?? {}) as Partial<ThemeState>;
+        if (version < 1 && !(state.theme && isNervTheme(state.theme))) {
+          return { ...state, theme: 'nerv' } as ThemeState;
+        }
+        return state as ThemeState;
+      },
     }
   )
 );

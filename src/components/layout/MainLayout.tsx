@@ -271,6 +271,17 @@ const THEME_CARDS: Array<{
   colors: { bg: string; card: string; border: string; text: string; textMuted: string };
 }> = [
   {
+    key: 'nerv',
+    labelKey: 'theme.nerv',
+    colors: {
+      bg: '#08090a',
+      card: '#0f1113',
+      border: '#ff6a00',
+      text: '#f2ede6',
+      textMuted: '#ff6a00',
+    },
+  },
+  {
     key: 'auto',
     labelKey: 'theme.auto',
     colors: {
@@ -312,17 +323,6 @@ const THEME_CARDS: Array<{
       border: '#3a3530',
       text: '#f6f4f1',
       textMuted: '#9c958d',
-    },
-  },
-  {
-    key: 'nerv',
-    labelKey: 'theme.nerv',
-    colors: {
-      bg: '#0a0605',
-      card: '#1d120d',
-      border: '#ff7a1a',
-      text: '#ffe3cc',
-      textMuted: '#ff7a1a',
     },
   },
   {

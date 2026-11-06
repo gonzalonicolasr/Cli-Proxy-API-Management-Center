@@ -109,6 +109,44 @@
   --shadow-lg: var(--login-dropdown-shadow);
 }
 
+// NERV family: reads the unit palette that the theme store puts on <html>.
+@mixin login-tokens-nerv {
+  color-scheme: dark;
+
+  --login-bg: var(--nerv-ink);
+  --login-dot-color: var(--nerv-primary);
+  --login-title: var(--text-primary);
+
+  --login-text: var(--text-primary);
+  --login-text-muted: var(--text-secondary);
+  --login-text-faint: var(--text-tertiary);
+
+  --login-field-bg: var(--bg-primary);
+  --login-field-bg-focus: var(--bg-primary);
+  --login-readout-bg: var(--bg-tertiary);
+  --login-border: var(--border-primary);
+  --login-border-hover: var(--border-hover);
+  --login-focus-border: var(--nerv-primary);
+  --login-focus-ring: color-mix(in srgb, var(--nerv-primary) 22%, transparent);
+  --login-hover-bg: var(--bg-hover);
+  --login-outline: var(--nerv-primary);
+
+  --login-submit-bg: var(--nerv-primary);
+  --login-submit-hover: var(--primary-hover);
+  --login-submit-fg: var(--nerv-ink);
+
+  --login-error: var(--nerv-red);
+
+  --login-dropdown-bg: var(--bg-tertiary);
+  --login-dropdown-hover: var(--bg-hover);
+  --login-dropdown-active: var(--bg-hover);
+  --login-dropdown-border: var(--border-primary);
+  --login-dropdown-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+
+  --login-loader-track: var(--border-color);
+  --login-loader-bar: var(--nerv-primary);
+}
+
 // 在 CSS Module 中使用：按 html[data-theme] 选择配色
 @mixin login-palette {
   @include login-tokens-light;
@@ -120,5 +158,9 @@
 
   :global(html[data-theme='dark']) & {
     @include login-tokens-dark;
+  }
+
+  :global(html[data-theme-family='nerv']) & {
+    @include login-tokens-nerv;
   }
 }

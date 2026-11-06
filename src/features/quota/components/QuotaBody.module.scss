@@ -381,8 +381,7 @@
   }
 }
 
-:global([data-theme='dark']) .premiumPlanValue,
-:global([data-theme-family='nerv']) .premiumPlanValue {
+:global([data-theme='dark']) .premiumPlanValue {
   background:
     radial-gradient(
       circle at 18% 24%,
@@ -606,8 +605,7 @@
 }
 
 /* 暗色：玉体压暗一档、光晕收敛；金边压暗避免在深底上刺眼。 */
-:global([data-theme='dark']) .elitePlanValue,
-:global([data-theme-family='nerv']) .elitePlanValue {
+:global([data-theme='dark']) .elitePlanValue {
   --jade-ink: #2e3a26;
   --jade-ink-shadow: 0 1px 0 rgba(252, 252, 240, 0.45);
   --jade-glint: rgba(255, 255, 255, 0.85);
@@ -640,8 +638,7 @@
 /* 减动效：玉光停在居中的一帧 —— 静态也是完成品。 */
 @media (prefers-reduced-motion: reduce) {
   .elitePlanValue,
-  :global([data-theme='dark']) .elitePlanValue,
-  :global([data-theme-family='nerv']) .elitePlanValue {
+  :global([data-theme='dark']) .elitePlanValue {
     animation: none;
     --jade-light-x: 50%;
   }
@@ -683,8 +680,7 @@
     }
   }
 
-  :global([data-theme='dark']) .premiumPlanValue,
-  :global([data-theme-family='nerv']) .premiumPlanValue {
+  :global([data-theme='dark']) .premiumPlanValue {
     background:
       radial-gradient(
         circle at 18% 24%,
